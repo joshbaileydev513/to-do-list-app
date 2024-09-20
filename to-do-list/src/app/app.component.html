@@ -1,0 +1,17 @@
+<h1>To-Do List</h1>
+
+<form (submit)="addTodo()">
+  <input [(ngModel)]="newTitle" placeholder="Title" required />
+  <textarea [(ngModel)]="newDescription" placeholder="Description" required></textarea>
+  <button type="submit">Add</button>
+</form>
+
+<ul>
+  <li *ngFor="let todo of todos">
+    <h2>{{ todo.title }}</h2>
+    <p>{{ todo.description }}</p>
+    <p>Status: {{ todo.status }}</p>
+    <button (click)="updateStatus(todo.id, 'completed')">Mark as Completed</button>
+    <button (click)="deleteTodo(todo.id)">Delete</button>
+  </li>
+</ul>
