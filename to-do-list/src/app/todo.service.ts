@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class TodoService {
   private apiUrl = 'http://localhost:3000/api/todos'; // Your backend URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getTodos(): Observable<any> {
     return this.http.get(this.apiUrl);
@@ -25,4 +25,9 @@ export class TodoService {
   deleteTodo(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  updateTodo(id: number, todo: { title: string; description: string }): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, todo);
+  }
+
 }

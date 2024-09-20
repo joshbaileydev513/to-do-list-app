@@ -4,12 +4,15 @@ import { TodoService } from './todo.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   todos: any[] = [];
   newTitle: string = '';
   newDescription: string = '';
+  editMode: boolean = false;
+  currentTodoId: number | null = null;
+  filterText: string = ''; // Property to hold the filter text
 
   constructor(private todoService: TodoService) {}
 
@@ -27,21 +30,47 @@ export class AppComponent implements OnInit {
     if (this.newTitle && this.newDescription) {
       this.todoService.addTodo(this.newTitle, this.newDescription).subscribe((todo) => {
         this.todos.push(todo);
-        this.newTitle = '';
-        this.newDescription = '';
+        this.resetForm();
       });
     }
   }
 
-  deleteTodo(id: number) {
-    this.todoService.deleteTodo(id).subscribe(() => {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
-    });
+  editTodo(todo: any) {
+    this.newTitle = todo.title;
+    this.newDescription = todo.description;
+    this.editMode = true;
+    this.currentTodoId = todo.id;
   }
 
-  updateStatus(id: number, status: string) {
-    this.todoService.updateTodoStatus(id, status).subscribe(() => {
-      this.loadTodos();
-    });
+  updateTodo() {
+    if (this.currentTodoId !== null) {
+      this.todoService.updateTodo(this.currentTodoId, { title: this.newTitle, description: this.newDescription })
+        .subscribe(() => {
+          this.loadTodos();
+          this.resetForm();
+        });
+    }
+  }
+
+  deleteTodo(id: number) {
+    if (confirm("Are you sure you want to delete this to-do?")) {
+      this.todoService.deleteTodo(id).subscribe(() => {
+        this.todos = this.todos.filter((todo) => todo.id !== id);
+      });
+    }
+  }
+
+  // Method to filter todos based on filterText
+  filteredTodos() {
+    return this.todos.filter(todo => 
+      todo.title.toLowerCase().includes(this.filterText.toLowerCase())
+    );
+  }
+
+  resetForm() {
+    this.newTitle = '';
+    this.newDescription = '';
+    this.editMode = false;
+    this.currentTodoId = null;
   }
 }
