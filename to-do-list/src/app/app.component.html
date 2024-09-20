@@ -1,14 +1,5 @@
 <h1>To-Do List</h1>
 
-<!-- Filter Input -->
-<div>
-  <input
-    type="text"
-    placeholder="Filter by title"
-    [(ngModel)]="filterText"
-  />
-</div>
-
 <!-- Form for adding or editing a to-do -->
 <form (ngSubmit)="editMode ? updateTodo() : addTodo()" #todoForm="ngForm">
   <input
@@ -38,17 +29,32 @@
     <small *ngIf="description.errors?.minlength">Description must be at least 5 characters long.</small>
   </div>
 
+  <!-- Due Date and Time Input -->
+  <input
+    type="date"
+    [(ngModel)]="newDueDate"
+    name="dueDate"
+    required
+  />
+  <input
+    type="time"
+    [(ngModel)]="newDueTime"
+    name="dueTime"
+    required
+  />
+
   <button type="submit" [disabled]="todoForm.invalid">
     {{ editMode ? 'Update' : 'Add' }}
   </button>
 </form>
 
-<!-- Display the list of todos -->
+<!-- Display the list of filtered todos -->
 <ul>
   <li *ngFor="let todo of filteredTodos()">
     <h2>{{ todo.title }}</h2>
     <p>{{ todo.description }}</p>
     <p>Status: {{ todo.status }}</p>
+    <p>Due Date: {{ todo.dueDate }} {{ todo.dueTime }}</p>
     <button (click)="editTodo(todo)">Edit</button>
     <button (click)="updateStatus(todo.id, 'completed')">Mark as Completed</button>
     <button (click)="deleteTodo(todo.id)">Delete</button>

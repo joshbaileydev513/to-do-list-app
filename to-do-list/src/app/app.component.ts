@@ -4,15 +4,18 @@ import { TodoService } from './todo.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
   todos: any[] = [];
   newTitle: string = '';
   newDescription: string = '';
+  newDueDate: string = '';   // New property for due date
+  newDueTime: string = '';   // New property for due time
   editMode: boolean = false;
   currentTodoId: number | null = null;
-  filterText: string = ''; // Property to hold the filter text
+  filterText: string = '';
+  statusFilter: string = 'all';
 
   constructor(private todoService: TodoService) {}
 
@@ -27,8 +30,15 @@ export class AppComponent implements OnInit {
   }
 
   addTodo() {
-    if (this.newTitle && this.newDescription) {
-      this.todoService.addTodo(this.newTitle, this.newDescription).subscribe((todo) => {
+    if (this.newTitle && this.newDescription && this.newDueDate && this.newDueTime) {
+      const newTodo = {
+        title: this.newTitle,
+        description: this.newDescription,
+        dueDate: this.newDueDate,
+        dueTime: this.newDueTime
+      };
+
+      this.todoService.addTodo(newTodo).subscribe((todo) => {
         this.todos.push(todo);
         this.resetForm();
       });
@@ -44,7 +54,14 @@ export class AppComponent implements OnInit {
 
   updateTodo() {
     if (this.currentTodoId !== null) {
-      this.todoService.updateTodo(this.currentTodoId, { title: this.newTitle, description: this.newDescription })
+      const updatedTodo = {
+        title: this.newTitle,
+        description: this.newDescription,
+        dueDate: this.newDueDate,
+        dueTime: this.newDueTime
+      };
+
+      this.todoService.updateTodo(this.currentTodoId, updatedTodo)
         .subscribe(() => {
           this.loadTodos();
           this.resetForm();
@@ -60,16 +77,24 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Method to filter todos based on filterText
+  // Filter todos by both title and status
   filteredTodos() {
     return this.todos.filter(todo => 
-      todo.title.toLowerCase().includes(this.filterText.toLowerCase())
+      todo.title.toLowerCase().includes(this.filterText.toLowerCase()) &&
+      (this.statusFilter === 'all' || todo.status === this.statusFilter)
     );
+  }
+
+  // Method to update the status filter when user selects from dropdown
+  filterTodos(status: string) {
+    this.statusFilter = status;
   }
 
   resetForm() {
     this.newTitle = '';
     this.newDescription = '';
+    this.newDueDate = '';
+    this.newDueTime = '';
     this.editMode = false;
     this.currentTodoId = null;
   }

@@ -11,8 +11,8 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',         // Your database username
-  password: 'password', // Your database password
-  database: 'todo_app'  // Your database name
+  password: 'Bailey716!', // Your database password
+  database: 'to_do_list'  // Your database name
 });
 
 // Get all to-do items

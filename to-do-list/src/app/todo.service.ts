@@ -14,10 +14,10 @@ export class TodoService {
     return this.http.get(this.apiUrl);
   }
 
-  addTodo(title: string, description: string): Observable<any> {
-    return this.http.post(this.apiUrl, { title, description });
+  addTodo(todo: any): Observable<any> {
+    return this.http.post(this.apiUrl, todo);
   }
-
+  
   updateTodoStatus(id: number, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, { status });
   }
@@ -26,8 +26,8 @@ export class TodoService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  updateTodo(id: number, todo: { title: string; description: string }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, todo);
+  updateTodo(id: number, updatedTodo: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, updatedTodo);
   }
 
 }
