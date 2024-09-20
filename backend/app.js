@@ -9,11 +9,13 @@ app.use(express.json());
 
 // Create a connection to the MariaDB database
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',         // Your database username
-  password: 'Bailey716!', // Your database password
-  database: 'to_do_list'  // Your database name
-});
+    host: 'localhost',
+    port: 3307,              
+    user: 'root',            
+    password: 'Bailey716!', 
+    database: 'to_do_list'    
+  });
+  
 
 // Get all to-do items
 app.get('/api/todos', (req, res) => {
@@ -51,5 +53,4 @@ app.delete('/api/todos/:id', (req, res) => {
   });
 });
 
-// Start the server
 app.listen(3000, () => console.log('Server running on port 3000'));
