@@ -19,7 +19,7 @@ const db = mysql.createConnection({
 
 // Get all to-do items
 app.get('/api/todos', (req, res) => {
-  db.query('SELECT * FROM todo_items', (err, result) => {
+  db.query('SELECT * FROM items', (err, result) => {
     if (err) return res.status(500).send(err);
     res.send(result);
   });
@@ -28,7 +28,7 @@ app.get('/api/todos', (req, res) => {
 // Add a new to-do item
 app.post('/api/todos', (req, res) => {
   const { title, description } = req.body;
-  db.query('INSERT INTO todo_items (title, description) VALUES (?, ?)', [title, description], (err, result) => {
+  db.query('INSERT INTO items (title, description) VALUES (?, ?)', [title, description], (err, result) => {
     if (err) return res.status(500).send(err);
     res.send({ id: result.insertId, title, description });
   });
@@ -38,7 +38,7 @@ app.post('/api/todos', (req, res) => {
 app.put('/api/todos/:id', (req, res) => {
   const { status } = req.body;
   const { id } = req.params;
-  db.query('UPDATE todo_items SET status = ? WHERE id = ?', [status, id], (err) => {
+  db.query('UPDATE items SET status = ? WHERE id = ?', [status, id], (err) => {
     if (err) return res.status(500).send(err);
     res.send({ message: 'Status updated' });
   });
@@ -47,7 +47,7 @@ app.put('/api/todos/:id', (req, res) => {
 // Delete a to-do item
 app.delete('/api/todos/:id', (req, res) => {
   const { id } = req.params;
-  db.query('DELETE FROM todo_items WHERE id = ?', [id], (err) => {
+  db.query('DELETE FROM items WHERE id = ?', [id], (err) => {
     if (err) return res.status(500).send(err);
     res.send({ message: 'Item deleted' });
   });
