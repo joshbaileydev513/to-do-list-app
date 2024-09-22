@@ -1,10 +1,16 @@
-.container {
+body {
+    background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); /* Light blue gradient */
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: transparent; /* Set to transparent to allow gradient background to show */
   }
   
   h1 {
