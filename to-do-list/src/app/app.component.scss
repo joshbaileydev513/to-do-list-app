@@ -27,6 +27,7 @@ body {
     background-color: #fff;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid black;
   }
   
   .todo-form, .todo-list {
@@ -100,6 +101,7 @@ body {
   
   .todo-actions {
     margin-top: 10px;
+    padding: 50px;
   }
   
   .todo-actions button {
@@ -111,6 +113,7 @@ body {
     cursor: pointer;
     border-radius: 4px;
     margin-right: 10px;
+    float: right;
   }
   
   .todo-actions button:nth-child(2) {
