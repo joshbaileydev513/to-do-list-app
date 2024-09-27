@@ -1,6 +1,11 @@
 <div class="container">
   <h1>To-Do List</h1>
 
+  <!-- Display the quote image if available -->
+  <div class="quote-container" *ngIf="quoteImageUrl">
+    <img [src]="quoteImageUrl" alt="Quote of the day" class="quote-image" />
+  </div>
+
   <div class="todo-container">
     <!-- Form for adding or editing a to-do -->
     <div class="todo-form">
@@ -75,3 +80,4 @@
     </div>
   </div>
 </div>
+

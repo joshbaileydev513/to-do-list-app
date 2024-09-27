@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoService } from './todo.service';
+import { TodoService } from './services/todo.service';
+import { QuoteService } from './services/quote.service';  // Import the QuoteService
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +19,13 @@ export class AppComponent implements OnInit {
   filterText: string = '';
   statusFilter: string = 'all';
 
-  constructor(private todoService: TodoService) {}
+  quoteImageUrl: string | null = null;  // Property to hold the quote image URL
+
+  constructor(private todoService: TodoService, private quoteService: QuoteService, private http: HttpClient) {}  // Inject HttpClient
 
   ngOnInit(): void {
     this.loadTodos();
+    this.loadQuote();  // Fetch the quote image on initialization
   }
 
   loadTodos() {
@@ -29,6 +34,15 @@ export class AppComponent implements OnInit {
     });
   }
 
+  loadQuote() {
+    this.quoteService.getQuoteImage()  // Use the QuoteService
+      .subscribe((data: any) => {
+        this.quoteImageUrl = data.image;  // Adjust this based on the actual response structure
+      }, error => {
+        console.error('Error fetching image:', error);
+      });
+  }
+  
   addTodo() {
     if (this.newTitle && this.newDescription && this.newDueDate && this.newDueTime) {
       const newTodo = {
