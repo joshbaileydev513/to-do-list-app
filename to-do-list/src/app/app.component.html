@@ -72,8 +72,8 @@
           <p>Due Date: {{ todo.dueDate }} {{ todo.dueTime }}</p>
           <div class="todo-actions">
             <button (click)="editTodo(todo)">Edit</button>
-            <button (click)="updateStatus(todo.id, 'completed')">Mark as Completed</button>
             <button (click)="deleteTodo(todo.id)">Delete</button>
+            <button (click)="updateStatus(todo.id, 'completed')">Mark as Completed</button>
           </div>
         </li>
       </ul>

@@ -1,162 +1,170 @@
 body {
-    background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); /* Light blue gradient */
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: transparent; /* Set to transparent to allow gradient background to show */
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-  }
-  
-  .todo-container {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    max-width: 1200px;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid black;
-  }
-  
-  .todo-form, .todo-list {
-    width: 48%;
-  }
-  
-  .todo-form {
-    padding-right: 20px;
-  }
-  
-  .input-group {
-    margin-bottom: 15px;
-  }
-  
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  input[type='date'], input[type='time'] {
-    width: 48%;
-    margin-right: 4%;
-  }
-  
-  input[type='time'] {
-    margin-right: 0;
-  }
-  
-  .submit-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .submit-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    background-color: #fafafa;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  h2 {
-    margin: 0 0 10px;
-    font-size: 1.25rem;
-    color: #333;
-  }
-  
-  p {
-    margin: 5px 0;
-    font-size: 1rem;
-  }
-  
-  .todo-actions {
-    margin-top: 10px;
-    padding: 50px;
-  }
-  
-  .todo-actions button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-right: 10px;
-    float: right;
-  }
-  
-  .todo-actions button:nth-child(2) {
-    background-color: #28a745;
-  }
-  
-  .todo-actions button:nth-child(3) {
-    background-color: #dc3545;
-  }
-  
-  .todo-actions button:hover {
-    opacity: 0.8;
-  }
-  
-  .quote-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  
-    // For larger screens, position the image to the right of the to-do list
-    @media (min-width: 768px) {
+  background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); /* Light blue gradient */
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* Set to transparent to allow gradient background to show */
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.todo-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 1200px;
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid black;
+}
+
+.todo-form, .todo-list {
+  width: 45%;
+}
+
+.todo-form {
+  padding-right: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+input[type='date'], input[type='time'] {
+  width: 48%;
+  margin-right: 4%;
+}
+
+input[type='time'] {
+  margin-right: 0;
+}
+
+.submit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submit-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fafafa;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  max-width: 500px; /* Reduce the width of the todo list items */
+  width: 65%; /* Ensure it is responsive within the parent container */
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.todo-actions {
+  margin-top: 10px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column; /* Stack the buttons vertically */
+  align-items: center; /* Align buttons to the left */
+}
+
+.todo-actions button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 5px; /* Small margin between buttons */
+  width: auto; /* Let the button adjust its width to content */
+}
+
+.todo-actions button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.todo-actions button:nth-child(3) {
+  background-color: #28a745;
+}
+
+.todo-actions button:last-child {
+  margin-bottom: 0; /* Remove the margin for the last button */
+}
+
+.todo-actions button:hover {
+  opacity: 0.8;
+}
+
+.quote-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  // For larger screens, position the image to the right of the to-do list
+  @media (min-width: 768px) {
       flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;
-    }
-  
-    .quote-image {
+  }
+
+  .quote-image {
       width: 100%;
       max-width: 600px;
       height: auto;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       margin-top: 20px;
-  
+
       // For larger screens, margin to the left for spacing when the image is on the right
       @media (min-width: 768px) {
-        margin-left: 20px;
-        margin-top: 0;
+          margin-left: 20px;
+          margin-top: 0;
       }
-    }
-  
-    button {
+  }
+
+  button {
       margin-top: 10px;
       padding: 10px 20px;
       background-color: #4caf50;
@@ -164,10 +172,9 @@ body {
       border: none;
       border-radius: 5px;
       cursor: pointer;
-    }
-  
-    button:hover {
-      background-color: #45a049;
-    }
   }
-  
+
+  button:hover {
+      background-color: #45a049;
+  }
+}
