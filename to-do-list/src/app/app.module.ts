@@ -7,13 +7,14 @@ import { AppRoutingModule } from './app-routing.module';  // Import AppRoutingMo
 
 import { AppComponent } from './app.component';
 import { TodoComponent } from './components/todo/todo.component';  // Import the new TodoComponent
-import { LoginComponent } from './components/login/login.component';  // Import the LoginComponent
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';  // Import the LoginComponent
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoComponent,   // Declare TodoComponent
-    LoginComponent   // Declare LoginComponent
+    LoginComponent, RegisterComponent   // Declare LoginComponent
   ],
   imports: [
     BrowserModule,
