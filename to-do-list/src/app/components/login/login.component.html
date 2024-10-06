@@ -1,0 +1,29 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form">
+      <div class="input-group">
+        <input
+          type="text"
+          placeholder="Username"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid">Login</button>
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>
