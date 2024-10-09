@@ -180,9 +180,10 @@ body {
   }
   
   .logout-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
   }
   
   .logout-container button {
