@@ -35,6 +35,7 @@ export class TodoComponent implements OnInit {
 
   loadTodos() {
     this.todoService.getTodos().subscribe((data) => {
+      console.log(data);  // Debugging: check the data structure
       this.todos = data;
     });
   }
@@ -54,15 +55,17 @@ export class TodoComponent implements OnInit {
         title: this.newTitle,
         description: this.newDescription,
         dueDate: this.newDueDate,
-        dueTime: this.newDueTime
+        dueTime: this.newDueTime,
+        status: 'pending'  // Set default status to 'pending' for new todos
       };
-
+  
       this.todoService.addTodo(newTodo).subscribe((todo) => {
-        this.todos.push(todo);
+        this.loadTodos();  // Refresh the list after adding a new to-do
         this.resetForm();
       });
     }
   }
+  
 
   editTodo(todo: any) {
     this.newTitle = todo.title;
@@ -73,20 +76,24 @@ export class TodoComponent implements OnInit {
 
   updateTodo() {
     if (this.currentTodoId !== null) {
+      const currentTodo = this.todos.find(todo => todo.id === this.currentTodoId);
       const updatedTodo = {
         title: this.newTitle,
         description: this.newDescription,
         dueDate: this.newDueDate,
-        dueTime: this.newDueTime
+        dueTime: this.newDueTime,
+        status: currentTodo ? currentTodo.status : 'pending'  // Replace optional chaining with traditional check
       };
-
+  
       this.todoService.updateTodo(this.currentTodoId, updatedTodo)
         .subscribe(() => {
-          this.loadTodos();
+          this.loadTodos();  // Refresh the list after updating the to-do
           this.resetForm();
         });
     }
   }
+  
+  
 
   deleteTodo(id: number) {
     if (confirm("Are you sure you want to delete this to-do?")) {
@@ -98,16 +105,26 @@ export class TodoComponent implements OnInit {
 
   // Filter todos by both title and status
   filteredTodos() {
+    console.log('Filtering todos with status:', this.statusFilter);
     return this.todos.filter(todo => 
       todo.title.toLowerCase().includes(this.filterText.toLowerCase()) &&
       (this.statusFilter === 'all' || todo.status === this.statusFilter)
     );
   }
+  
 
   // Method to update the status filter when user selects from dropdown
   filterTodos(status: string) {
     this.statusFilter = status;
   }
+
+  formatTime(dueTime: string): string {
+    if (dueTime) {
+      return dueTime.substring(0, 5); // Extract the HH:mm part from HH:mm:ss
+    }
+    return ''; // Return an empty string if dueTime is null or undefined
+  }
+  
 
   logout() {
     console.log('Logout button clicked');  // Add this for debugging

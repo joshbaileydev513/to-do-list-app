@@ -27,12 +27,44 @@ app.get('/api/todos', (req, res) => {
 
 // Add a new to-do item
 app.post('/api/todos', (req, res) => {
-  const { title, description } = req.body;
-  db.query('INSERT INTO items (title, description) VALUES (?, ?)', [title, description], (err, result) => {
-    if (err) return res.status(500).send(err);
-    res.send({ id: result.insertId, title, description });
-  });
+  // Extract data from the request body
+  const { title, description, status = 'pending', dueDate, dueTime } = req.body;
+
+  // Add console log to debug the data received from the front-end
+  console.log('Received data:', { title, description, status, dueDate, dueTime });
+
+  // Check if title and description are provided
+  if (!title || !description) {
+    return res.status(400).send({ message: 'Title and description are required' });
+  }
+
+  // Add console log to debug what data will be inserted into the database
+  console.log('Data to be inserted:', [title, description, status, dueDate, dueTime]);
+
+  // Insert the new to-do item into the database
+  db.query(
+    'INSERT INTO items (title, description, status, due_date, due_time) VALUES (?, ?, ?, ?, ?)',
+    [title, description, status, dueDate, dueTime],
+    (err, result) => {
+      if (err) {
+        console.error('Error inserting data:', err);  // Log SQL error, if any
+        return res.status(500).send(err);
+      }
+
+      // Return the newly created to-do item
+      res.send({
+        id: result.insertId,
+        title,
+        description,
+        status,
+        dueDate,
+        dueTime
+      });
+    }
+  );
 });
+
+
 
 // Update a to-do item's status
 app.put('/api/todos/:id', (req, res) => {
