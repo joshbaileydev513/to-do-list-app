@@ -30,16 +30,10 @@ app.post('/api/todos', (req, res) => {
   // Extract data from the request body
   const { title, description, status = 'pending', dueDate, dueTime } = req.body;
 
-  // Add console log to debug the data received from the front-end
-  console.log('Received data:', { title, description, status, dueDate, dueTime });
-
   // Check if title and description are provided
   if (!title || !description) {
     return res.status(400).send({ message: 'Title and description are required' });
   }
-
-  // Add console log to debug what data will be inserted into the database
-  console.log('Data to be inserted:', [title, description, status, dueDate, dueTime]);
 
   // Insert the new to-do item into the database
   db.query(
