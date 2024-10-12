@@ -47,7 +47,8 @@
                     <h2>{{ todo.title }}</h2>
                     <p>{{ todo.description }}</p>
                     <p>Status: {{ todo.status }}</p>
-                    <p>Due Date: {{ todo.dueDate }} {{ todo.dueTime }}</p>
+                    <!--  Angular pipes to format the date and time in the template -->
+                    <p>Due Date: {{ todo.due_date | date:'longDate' }} at {{ formatTime(todo.due_time) }}</p>
                     <div class="todo-actions">
                         <button (click)="editTodo(todo)">Edit</button>
                         <button (click)="deleteTodo(todo.id)">Delete</button>
