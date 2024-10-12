@@ -35,7 +35,6 @@ export class TodoComponent implements OnInit {
 
   loadTodos() {
     this.todoService.getTodos().subscribe((data) => {
-      console.log(data);  // Debugging: check the data structure
       this.todos = data;
     });
   }
@@ -105,7 +104,6 @@ export class TodoComponent implements OnInit {
 
   // Filter todos by both title and status
   filteredTodos() {
-    console.log('Filtering todos with status:', this.statusFilter);
     return this.todos.filter(todo => 
       todo.title.toLowerCase().includes(this.filterText.toLowerCase()) &&
       (this.statusFilter === 'all' || todo.status === this.statusFilter)
@@ -127,7 +125,6 @@ export class TodoComponent implements OnInit {
   
 
   logout() {
-    console.log('Logout button clicked');  // Add this for debugging
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
   }
