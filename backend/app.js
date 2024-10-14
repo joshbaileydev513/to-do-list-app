@@ -60,15 +60,30 @@ app.post('/api/todos', (req, res) => {
 
 
 
-// Update a to-do item's status
+// Update a to-do item (title, description, due date, due time, and status)
 app.put('/api/todos/:id', (req, res) => {
-  const { status } = req.body;
+  const { title, description, status, dueDate, dueTime } = req.body;
   const { id } = req.params;
-  db.query('UPDATE items SET status = ? WHERE id = ?', [status, id], (err) => {
-    if (err) return res.status(500).send(err);
-    res.send({ message: 'Status updated' });
-  });
+
+  // Check if required fields are provided
+  if (!title || !description) {
+    return res.status(400).send({ message: 'Title and description are required' });
+  }
+
+  // Update the to-do item in the database
+  db.query(
+    'UPDATE items SET title = ?, description = ?, status = ?, due_date = ?, due_time = ? WHERE id = ?',
+    [title, description, status, dueDate, dueTime, id],
+    (err) => {
+      if (err) {
+        console.error('Error updating data:', err);  // Log SQL error, if any
+        return res.status(500).send(err);
+      }
+      res.send({ message: 'Todo updated successfully' });
+    }
+  );
 });
+
 
 // Delete a to-do item
 app.delete('/api/todos/:id', (req, res) => {
