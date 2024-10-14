@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoService {
-  // Pointing to your Express backend URL
+  // Backend URL for to-dos
   private apiUrl = 'http://localhost:3000/api/todos'; 
 
   constructor(private http: HttpClient) { }
@@ -21,9 +21,9 @@ export class TodoService {
     return this.http.post(this.apiUrl, todo);
   }
 
-  // Update the status of a to-do item (e.g., mark as 'completed')
-  updateTodoStatus(id: number, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, { status });
+  // Update a to-do item with new data (title, description, status, dueDate, dueTime)
+  updateTodo(id: number, updatedTodo: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, updatedTodo);
   }
 
   // Delete a to-do item
@@ -31,9 +31,9 @@ export class TodoService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  // Update a to-do item with new data
-  updateTodo(id: number, updatedTodo: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, updatedTodo);
+  // Update the status of a to-do item (e.g., mark as 'completed')
+  updateTodoStatus(id: number, status: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, { status });
   }
 
   // Filter to-dos based on status (pending, completed, all)

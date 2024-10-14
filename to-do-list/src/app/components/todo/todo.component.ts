@@ -67,33 +67,42 @@ export class TodoComponent implements OnInit {
   
 
   editTodo(todo: any) {
+    console.log('Editing todo:', todo);  // Log to check the todo being edited
     this.newTitle = todo.title;
     this.newDescription = todo.description;
+    this.newDueDate = todo.due_date ? todo.due_date : '';  // Set default if null
+    this.newDueTime = todo.due_time ? todo.due_time : '';  // Set default if null
     this.editMode = true;
     this.currentTodoId = todo.id;
   }
-
+  
   updateTodo() {
     if (this.currentTodoId !== null) {
       const currentTodo = this.todos.find(todo => todo.id === this.currentTodoId);
+  
+      if (!currentTodo) {
+        console.error(`Todo with id ${this.currentTodoId} not found.`);
+        return;
+      }
+  
       const updatedTodo = {
         title: this.newTitle,
         description: this.newDescription,
         dueDate: this.newDueDate,
         dueTime: this.newDueTime,
-        status: currentTodo ? currentTodo.status : 'pending'  // Replace optional chaining with traditional check
+        status: currentTodo.status  // Keep the current status (whether 'pending', 'completed', etc.)
       };
   
       this.todoService.updateTodo(this.currentTodoId, updatedTodo)
         .subscribe(() => {
           this.loadTodos();  // Refresh the list after updating the to-do
           this.resetForm();
+        }, (error) => {
+          console.error('Error updating todo:', error);  // Log any errors during the update
         });
     }
   }
   
-  
-
   deleteTodo(id: number) {
     if (confirm("Are you sure you want to delete this to-do?")) {
       this.todoService.deleteTodo(id).subscribe(() => {
