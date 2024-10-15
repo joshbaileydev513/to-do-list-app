@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class QuoteService {
-  private apiUrl = '/api/image';  // Use the proxy endpoint
+  private apiUrl = 'http://api.quotable.io/random';  // Quotable API endpoint
 
   constructor(private http: HttpClient) {}
 
-  getQuoteImage(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);  // Get the image data
+  getQuote(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);  // Make the GET request to the Quotable API
   }
 }

@@ -20,7 +20,8 @@ export class TodoComponent implements OnInit {
   filterText: string = '';
   statusFilter: string = 'all';
 
-  quoteImageUrl: string | null = null;  // Property to hold the quote image URL
+  quoteText: string | null = null;  // Property to hold the quote text
+  quoteAuthor: string | null = null;  // Property to hold the quote text
 
   constructor(
     private todoService: TodoService, 
@@ -30,7 +31,7 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTodos();
-    this.loadQuote();  // Fetch the quote image on initialization
+    this.loadQuote();  // Fetch the Stoic quote on initialization
   }
 
   loadTodos() {
@@ -40,14 +41,18 @@ export class TodoComponent implements OnInit {
   }
 
   loadQuote() {
-    this.quoteService.getQuoteImage()  // Use the QuoteService
-      .subscribe((data: any) => {
-        this.quoteImageUrl = data.image;  // Adjust this based on the actual response structure
-      }, error => {
-        console.error('Error fetching image:', error);
-      });
+    this.quoteService.getQuote().subscribe(
+      (data: any) => {
+        this.quoteText = data.content;  // The quote text is in 'content'
+        this.quoteAuthor = data.author;  // The quote author
+        console.log('Quotable Quote:', this.quoteText);
+      },
+      (error) => {
+        console.error('Error fetching quote:', error);
+      }
+    );
   }
-
+  
   addTodo() {
     if (this.newTitle && this.newDescription && this.newDueDate && this.newDueTime) {
       const newTodo = {
@@ -65,7 +70,6 @@ export class TodoComponent implements OnInit {
     }
   }
   
-
   editTodo(todo: any) {
     console.log('Editing todo:', todo);  // Log to check the todo being edited
     this.newTitle = todo.title;
@@ -119,7 +123,6 @@ export class TodoComponent implements OnInit {
     );
   }
   
-
   // Method to update the status filter when user selects from dropdown
   filterTodos(status: string) {
     this.statusFilter = status;
@@ -132,12 +135,10 @@ export class TodoComponent implements OnInit {
     return ''; // Return an empty string if dueTime is null or undefined
   }
   
-
   logout() {
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
   }
-  
   
   resetForm() {
     this.newTitle = '';
