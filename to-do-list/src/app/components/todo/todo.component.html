@@ -1,11 +1,11 @@
+<!-- Logout button positioned at the top-right of the page -->
+<div class="logout-container">
+    <button (click)="logout()">Logout</button>
+  </div>
+
 <div class="container">
     <h1>To-Do List</h1>
-
-    <!-- Display the quote image if available -->
-    <div class="quote-container" *ngIf="quoteImageUrl">
-        <img [src]="quoteImageUrl" alt="Quote of the day" class="quote-image" />
-    </div>
-
+    
     <div class="todo-container">
         <!-- Form for adding or editing a to-do -->
         <div class="todo-form">
@@ -38,6 +38,14 @@
                     {{ editMode ? 'Update' : 'Add' }}
                 </button>
             </form>
+
+            <div class="quote-container" *ngIf="quoteText">
+                <blockquote class="quote-text">{{ quoteText }}</blockquote>
+                <div>
+                    <footer *ngIf="quoteAuthor" class="quote-author">— {{ quoteAuthor }}</footer>
+                </div>
+            </div>
+            
         </div>
 
         <!-- Display the list of filtered todos -->
@@ -59,9 +67,9 @@
         </div>
     </div>
 
-    <!-- Logout button positioned at the top-right of the page -->
-    <div class="logout-container">
+    <!-- moved logout back up to the top right for now -->
+    <!-- <div class="logout-container">
         <button (click)="logout()">Logout</button>
-    </div>
+    </div> -->
 
 </div>

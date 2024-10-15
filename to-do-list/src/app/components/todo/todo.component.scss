@@ -138,32 +138,42 @@ body {
   
   .quote-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  // Always stack vertically
     align-items: center;
     margin-top: 20px;
-  
-    // For larger screens, position the image to the right of the to-do list
-    @media (min-width: 768px) {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
-    }
-  
-    .quote-image {
-        width: 100%;
-        max-width: 600px;
-        height: auto;
+    padding: 75px;
+
+    .quote-text {
+        font-style: italic;
+        font-size: 1.5em;
+        color: #333;
+        text-align: center;
+        margin-top: 20px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-  
-        // For larger screens, margin to the left for spacing when the image is on the right
+        background-color: #f9f9f9;
+        max-width: 600px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .quote-author {
+        font-size: 1.2em;
+        color: #555;  // A subtle gray color to differentiate it from the quote
+        text-align: right;
+        margin-top: 10px;
+        font-weight: bold;
+        font-style: normal;  // Keeping the author's name in a normal style, not italic
+        padding-right: 20px;
+        
+        // Slightly increase the font size for larger screens
         @media (min-width: 768px) {
-            margin-left: 20px;
-            margin-top: 0;
+            font-size: 1.3em;
         }
     }
-  
+
     button {
         margin-top: 10px;
         padding: 10px 20px;
@@ -180,10 +190,9 @@ body {
   }
   
   .logout-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
   }
   
   .logout-container button {
@@ -198,4 +207,5 @@ body {
   .logout-container button:hover {
     background-color: #ff7875;
   }
+  
   
