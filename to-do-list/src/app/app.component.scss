@@ -1,5 +1,9 @@
 body {
-  background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); /* Light blue gradient */
+  background: linear-gradient(to bottom, rgba(161, 196, 253, 0.8), rgba(194, 233, 251, 0.8)),
+              url('/assets/serene-forest.jpg') no-repeat center center fixed;
+  background: linear-gradient(to bottom, rgba(161, 196, 253, 0.8), rgba(194, 233, 251, 0.8)),
+              url('/assets/serene-forest.webp') no-repeat center center fixed;
+  background-size: cover;
   height: 100vh;
   margin: 0;
 }
@@ -9,13 +13,28 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: transparent; /* Set to transparent to allow gradient background to show */
+  background-color: transparent;
+  /* Set to transparent to allow gradient background to show */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 h1 {
   margin-bottom: 20px;
   font-family: 'Arial', sans-serif;
   color: #333;
+  text-align: center;
 }
 
 .todo-container {
@@ -25,8 +44,9 @@ h1 {
   max-width: 1200px;
   background-color: #fff;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .todo-form, .todo-list {
@@ -45,7 +65,8 @@ input, textarea {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #b0dfe5; // Softer blue color for peaceful effect
   border-radius: 4px;
 }
 
@@ -59,7 +80,7 @@ input[type='time'] {
 }
 
 .submit-btn {
-  background-color: #4CAF50;
+  background-color: #8fcfd1;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -102,14 +123,14 @@ p {
 
 .todo-actions {
   margin-top: 10px;
-  padding: 50px;
+  padding: 20px;
   display: flex;
   flex-direction: column; /* Stack the buttons vertically */
   align-items: center; /* Align buttons to the left */
 }
 
 .todo-actions button {
-  background-color: #007BFF;
+  background-color: #69a3b2; // Soft blue
   color: white;
   border: none;
   padding: 8px 15px;
@@ -121,11 +142,11 @@ p {
 }
 
 .todo-actions button:nth-child(2) {
-  background-color: #dc3545;
+  background-color: #f77f00;
 }
 
 .todo-actions button:nth-child(3) {
-  background-color: #28a745;
+  background-color: #00b894;
 }
 
 .todo-actions button:last-child {
@@ -141,6 +162,11 @@ p {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  background-color: rgba(255, 255, 224, 0.8); // Light yellow/beige
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #f0e68c; // A similar shade for border
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   // For larger screens, position the image to the right of the to-do list
   @media (min-width: 768px) {
