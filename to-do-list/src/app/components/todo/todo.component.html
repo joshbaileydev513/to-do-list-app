@@ -1,77 +1,68 @@
-<body>
+<div class="container">
+    <h1>To-Do List</h1>
     <!-- Logout button positioned at the top-right of the page -->
     <div class="logout-container">
         <button (click)="logout()">Logout</button>
     </div>
 
-    <div class="container">
-        <h1>To-Do List</h1>
-
-        <div class="todo-container">
-            <!-- Form for adding or editing a to-do -->
-            <div class="todo-form">
-                <form (ngSubmit)="editMode ? updateTodo() : addTodo()" #todoForm="ngForm">
-                    <div class="input-group">
-                        <input type="text" placeholder="Title" [(ngModel)]="newTitle" name="title" required minlength="3"
-                            #title="ngModel" />
-                        <div *ngIf="title.invalid && title.touched" class="error">
-                            <small *ngIf="title.errors?.required">Title is required.</small>
-                            <small *ngIf="title.errors?.minlength">Title must be at least 3 characters long.</small>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <textarea placeholder="Description" [(ngModel)]="newDescription" name="description" required
-                            minlength="5" #description="ngModel"></textarea>
-                        <div *ngIf="description.invalid && description.touched" class="error">
-                            <small *ngIf="description.errors?.required">Description is required.</small>
-                            <small *ngIf="description.errors?.minlength">Description must be at least 5 characters
-                                long.</small>
-                        </div>
-                    </div>
-
-                    <div class="input-group date-time-group">
-                        <input type="date" [(ngModel)]="newDueDate" name="dueDate" required />
-                        <input type="time" [(ngModel)]="newDueTime" name="dueTime" required />
-                    </div>
-
-                    <button type="submit" [disabled]="todoForm.invalid" class="submit-btn">
-                        {{ editMode ? 'Update' : 'Add' }}
-                    </button>
-                </form>
-
-                <div class="quote-container" *ngIf="quoteText">
-                    <blockquote class="quote-text">{{ quoteText }}</blockquote>
-                    <div>
-                        <footer *ngIf="quoteAuthor" class="quote-author">— {{ quoteAuthor }}</footer>
+    <div class="todo-container">
+        <!-- Form for adding or editing a to-do -->
+        <div class="todo-form">
+            <form (ngSubmit)="editMode ? updateTodo() : addTodo()" #todoForm="ngForm">
+                <div class="input-group">
+                    <input type="text" placeholder="Title" [(ngModel)]="newTitle" name="title" required minlength="3"
+                        #title="ngModel" />
+                    <div *ngIf="title.invalid && title.touched" class="error">
+                        <small *ngIf="title.errors?.required">Title is required.</small>
+                        <small *ngIf="title.errors?.minlength">Title must be at least 3 characters long.</small>
                     </div>
                 </div>
 
+                <div class="input-group">
+                    <textarea placeholder="Description" [(ngModel)]="newDescription" name="description" required
+                        minlength="5" #description="ngModel"></textarea>
+                    <div *ngIf="description.invalid && description.touched" class="error">
+                        <small *ngIf="description.errors?.required">Description is required.</small>
+                        <small *ngIf="description.errors?.minlength">Description must be at least 5 characters
+                            long.</small>
+                    </div>
+                </div>
+
+                <div class="input-group date-time-group">
+                    <input type="date" [(ngModel)]="newDueDate" name="dueDate" required />
+                    <input type="time" [(ngModel)]="newDueTime" name="dueTime" required />
+                </div>
+
+                <button type="submit" [disabled]="todoForm.invalid" class="submit-btn">
+                    {{ editMode ? 'Update' : 'Add' }}
+                </button>
+            </form>
+
+            <div class="quote-container" *ngIf="quoteText">
+                <blockquote class="quote-text">{{ quoteText }}</blockquote>
+                <div>
+                    <footer *ngIf="quoteAuthor" class="quote-author">— {{ quoteAuthor }}</footer>
+                </div>
             </div>
 
-            <!-- Display the list of filtered todos -->
-            <div class="todo-list">
-                <ul>
-                    <li *ngFor="let todo of filteredTodos()">
-                        <h2>{{ todo.title }}</h2>
-                        <p>{{ todo.description }}</p>
-                        <p>Status: {{ todo.status }}</p>
-                        <!--  Angular pipes to format the date and time in the template -->
-                        <p>Due Date: {{ todo.due_date | date:'longDate' }} at {{ formatTime(todo.due_time) }}</p>
-                        <div class="todo-actions">
-                            <button (click)="editTodo(todo)">Edit</button>
-                            <button (click)="deleteTodo(todo.id)">Delete</button>
-                            <button (click)="updateStatus(todo.id, 'completed')">Mark as Completed</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </div>
 
-        <!-- moved logout back up to the top right for now -->
-        <!-- <div class="logout-container">
-            <button (click)="logout()">Logout</button>
-        </div> -->
-
+        <!-- Display the list of filtered todos -->
+        <div class="todo-list">
+            <ul>
+                <li *ngFor="let todo of filteredTodos()">
+                    <h2>{{ todo.title }}</h2>
+                    <p>{{ todo.description }}</p>
+                    <p>Status: {{ todo.status }}</p>
+                    <!--  Angular pipes to format the date and time in the template -->
+                    <p>Due Date: {{ todo.due_date | date:'longDate' }} at {{ formatTime(todo.due_time) }}</p>
+                    <div class="todo-actions">
+                        <button (click)="editTodo(todo)">Edit</button>
+                        <button (click)="deleteTodo(todo.id)">Delete</button>
+                        <button (click)="updateStatus(todo.id, 'completed')">Mark as Completed</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
-</body>
+</div>
