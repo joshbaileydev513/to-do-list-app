@@ -1,8 +1,18 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+*, 
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: linear-gradient(to bottom right, #e5f0f8, #cbe6f6);
   background-size: cover;
   min-height: 100vh;
   margin: 0;
   padding: 0;
+  font-family: 'Inter', sans-serif;
 }
 
   .container {
@@ -26,10 +36,11 @@ body {
     max-width: 1200px;
     box-sizing: border-box; 
     padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
     background: url('/assets/serene-forest.jpg') no-repeat center center;
     background-size: cover;
+    backdrop-filter: blur(15px); /* optional "frosted glass" effect if supported */
   }
   
   .todo-form, .todo-list {
@@ -37,20 +48,38 @@ body {
   }
   
   .todo-form {
-    padding-right: 20px;
+    padding: 25px;
+
+    .submit-btn {
+      display: block;
+      margin: 10px auto 0; // 10px top margin for spacing, then auto for left and right
+    }
   }
   
   .input-group {
     margin-bottom: 15px;
+
+    .error {
+      color: white;
+    }
   }
   
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+  
+      &:focus {
+        border-color: #007bff;
+        /* highlight border on focus */
+        outline: none;
+        /* remove default outline */
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+      }
+    }
   
   input[type='date'], input[type='time'] {
     width: 48%;
@@ -82,7 +111,7 @@ body {
   }
   
   li {
-    background: linear-gradient(to bottom, rgba(161, 196, 253, 0.8), rgba(194, 233, 251, 0.8));
+    background: #ffffffcc; /* subtle white with slight transparency */
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -155,7 +184,7 @@ body {
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background: linear-gradient(to bottom, rgba(161, 196, 253, 0.8), rgba(194, 233, 251, 0.8));
+        background: #ffffffcc; /* subtle white with slight transparency */
         max-width: 600px;
         width: 100%;
         margin-left: auto;
@@ -212,3 +241,4 @@ body {
       background-color: #ff7875;
     }
   }
+
