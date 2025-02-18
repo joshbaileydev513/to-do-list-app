@@ -242,3 +242,44 @@ html, body {
     }
   }
 
+/* Tablet screens (example: up to 768px) */
+@media (max-width: 768px) {
+  .todo-container {
+    flex-direction: column;   /* Stack form and list vertically */
+    align-items: center;      /* Center them horizontally */
+    padding: 15px;
+  }
+
+  .todo-form,
+  .todo-list {
+    width: 100%;             /* Take full width in mobile */
+    margin-bottom: 20px;     /* Some spacing between form and list */
+  }
+
+  li {
+    width: 100%;             /* Let to-do items fill parent width */
+    max-width: 600px;        /* Optional limit */
+  }
+}
+
+/* Smaller mobile screens (example: up to 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;       /* Slightly smaller title */
+    margin: 15px 0;
+  }
+
+  .todo-container {
+    padding: 10px;
+    border-radius: 8px;      /* slightly smaller corner radius */
+  }
+
+  .submit-btn {
+    width: 80%;              /* Make button bigger / more tappable on mobile */
+  }
+
+  /* If you want to reduce padding in .todo-actions for smaller screens */
+  .todo-actions {
+    padding: 20px;
+  }
+}
